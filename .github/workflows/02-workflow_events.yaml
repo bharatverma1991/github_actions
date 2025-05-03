@@ -15,4 +15,4 @@ jobs:
         steps:
             - name: Event Name
               run: |
-                echo "Event Name on which this was triggreed : ${{ github.event_name}}"
+                echo "Event Name on which this was triggreed : ${{ github.event_name }}"
