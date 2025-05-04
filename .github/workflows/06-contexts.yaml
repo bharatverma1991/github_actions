@@ -7,10 +7,16 @@ on:
             debug:
              type: boolean
              default: false
+env: 
+    My_WORKFLOW_VAR: "Workflow"
+    My_OVERWRITTE_VAR: "Workflow" 
 
 jobs:
     echo-data:
         runs-on: ubuntu-latest
+        env:
+            MY_JOB_VAR: "job"
+            My_OVERWRITTE_VAR: "Job"
         steps: 
             - name: Display Information
               run: | 
@@ -23,3 +29,6 @@ jobs:
                 echo " Run numnber ${{ github.run_number }}"
             - name: Retrieve Variable
               run: echo " Variable is ${{ vars.MY_VAR }}"
+            - name: Retrieve Variable 2nd
+              run: echo " Variable is ${{ env.My_OVERWRITTE_VAR }}"
+            
