@@ -1,3 +1,3 @@
 # github_actions
 
-Contails all files 
+Contails all files.
