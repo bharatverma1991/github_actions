@@ -8,6 +8,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Failing Step
+              run: sleep 20
+            - name: Failing Step
               run: exit 1 
             - name: I will be skipped
               if: ${{ success() }}
