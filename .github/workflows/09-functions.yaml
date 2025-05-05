@@ -7,8 +7,16 @@ jobs:
     echo1:
         runs-on: ubuntu-latest
         steps:
-            - name: Failing Step
-              run: sleep 20
+            - name: get title
+              run:  echo "${{ github.event.pull_request.title }}"
+            - name: print title 
+              run: | 
+                cat << EOF
+                ${{ toJson(github.event.pull_request.title) }}
+                EOF
+            - name: Bug Step
+              if: ${{ !cancelled() && contains(github.event.pull_request.title,'fix') }}
+              run:  echo "${{ github.event.pull_request.title }}"
             - name: Failing Step
               run: exit 1 
             - name: I will be skipped
