@@ -31,9 +31,11 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                   name: app
+                  path: 04-using-actions/react-app/build
 
     deploy:
         runs-on: ubuntu-latest
+        needs: build
         steps:
             - name: Download artifacts
               uses: actions/download-artifact@v3
