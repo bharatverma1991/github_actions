@@ -1,6 +1,9 @@
 name: 14 - Working with Artifacts
 on:
     workflow_dispatch:
+env:
+    build_artifact_key: app-${{ github.sha }}
+    test_artifact_key: tests-${{ github.sha }}
 jobs: 
     build:
         runs-on: ubuntu-latest
@@ -24,13 +27,18 @@ jobs:
               if: steps.cache.outputs.cache-hit != 'true'
               run: npm ci
             - name: Unit Tests
-              run: npm run test
+              run: npm run test -- --coverage
+            - name: upload tests results
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ${{ env.test_artifact_key }}
+                  path: 04-using-actions/react-app/coverage
             - name: Build Code
               run: npm run build
             - name: upload artifacts
               uses: actions/upload-artifact@v4
               with:
-                  name: app
+                  name: ${{ env.build_artifact_key }}
                   path: 04-using-actions/react-app/build
 
     deploy:
