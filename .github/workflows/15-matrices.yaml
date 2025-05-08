@@ -15,7 +15,6 @@ jobs:
                     - os: ubuntu-latest
                       node-version: 21.x
                       tag: Experimental
-
         steps:
             - name: Setup Node
               uses: actions/setup-node@v2
@@ -23,3 +22,17 @@ jobs:
                   node-version: ${{ matrix.node-version }}
             - name: perform some test
               run:   echo "Running on ${{ matrix.os }} with Node.js version ${{ matrix.node-version }}"
+    include-example:
+        runs-on: ubuntu-latest
+        name: ${{matrix.color}}-${{ matrix.shape }}-${{ matrix.size }}
+        strategy:
+            matrix:
+                color: [red, green]
+                shape: [circle, square]
+                size: [small, large]
+                include:
+                    - color: red
+                      shape: triangle
+        steps:
+            - name: Dummy Step
+              run:  echo ${{matrix.color}}-${{ matrix.shape }}-${{ matrix.size }}
