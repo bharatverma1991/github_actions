@@ -7,13 +7,19 @@ jobs:
         name:  ${{ matrix.os }}-${{ matrix.node-version }}
         runs-on: ${{ matrix.os }}
         strategy:
+            fail-fast: true
             matrix:
                 node-version: [20.x, 18.x, 16.x]
                 os: [ubuntu-latest, windows-latest]
+                include:
+                    - os: ubuntu-latest
+                      node-version: 21.x
+                      tag: Experimental
+
         steps:
             - name: Setup Node
               uses: actions/setup-node@v2
               with:
                   node-version: ${{ matrix.node-version }}
             - name: perform some test
-              run:   Echo "Running on ${{ matrix.os }} with Node.js version ${{ matrix.node-version }}"
+              run:   echo "Running on ${{ matrix.os }} with Node.js version ${{ matrix.node-version }}"
