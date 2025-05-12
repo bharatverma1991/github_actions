@@ -5,7 +5,7 @@ on:
             url:
                 description: "URL to ping"
                 type: string
-                default: "https://github.com"
+                default: "https://www.google.com"
                 required: true
 jobs:
     ping-url:
